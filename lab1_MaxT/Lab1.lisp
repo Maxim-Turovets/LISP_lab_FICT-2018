@@ -4,7 +4,6 @@
 (setq l3 '(U I 8 9 6 5 4 3 (1 2 3)))
 
 ; Task 1
-
 (print(
 (lambda (l1 l2 l3)
    (cons (car l1) (cons (car l2) (cons (car l3)nil)))) 
@@ -33,7 +32,6 @@
          (print a))
          )
     
-    ;else     
   (Loop for i from 1 to (length l4)
          for a in l4
          do
@@ -43,7 +41,6 @@
          )         
  )
 )
-
 (FUN z l4)
  
 
