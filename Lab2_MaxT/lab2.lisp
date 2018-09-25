@@ -6,3 +6,26 @@
         
                      ;list1     list2   count
        (print( ins '(1 2 3 4) '(5 6 7 8) 4))
+	   
+; Task 3
+  (setq l4 '(1 2 3 8 5 4))
+  
+       
+(defun is-sortedp (lst)
+  (cond ((or (null lst) (null (cdr lst))) t)
+        ((< (car lst) (car (cdr lst))) (is-sortedp (cdr lst)))
+        (t nil)))
+
+
+(defun bubble (lst)
+  (cond ((or (null lst) (null (cdr lst))) lst)
+        (( < (car lst) (car (cdr lst))) (cons (car lst) (bubble (cdr lst))))
+        ( t (cons (car (cdr lst)) (bubble (cons (car lst) (cdr (cdr lst))))))))
+
+
+(defun bubble-sort (lst)
+  (cond ((or (null lst) (null (cdr lst))) lst)
+        ((is-sortedp  lst) lst)
+        (t (bubble-sort (bubble lst)))))
+        
+(print (bubble-sort l4) )	   
