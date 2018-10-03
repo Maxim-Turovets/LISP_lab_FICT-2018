@@ -28,4 +28,25 @@
         ((is-sortedp  lst) lst)
         (t (bubble-sort (bubble lst)))))
         
-(print (bubble-sort l4) )	   
+(print (bubble-sort l4) )	 
+
+; Task 6
+(defun chars (s)
+  (loop for a across (string  s)
+        collect (char-code a)))
+        
+(defun codes (w)
+  (cond             
+  ((null  w) t)
+  ((listp (car w) )  (codes (car w)))
+  ((print(chars (car w ))) (codes (cdr w )))
+)
+
+     
+
+        
+ )
+ 
+
+ 
+ (codes '(A d r h j u (a d c)))  
