@@ -38,13 +38,9 @@
 (defun codes (w)
   (cond             
   ((null  w) t)
-  ((listp (car w) )  (codes (car w)))
-  ((print(chars (car w ))) (codes (cdr w )))
+  ((listp (car w) )  (codes (car w))) ; является ли голова списком иначе рекурсия для головы
+  ((print(chars (car w ))) (codes (cdr w ))) ; иначе рекурсивно для хвоста
 )
-
-     
-
-        
  )
  
 
