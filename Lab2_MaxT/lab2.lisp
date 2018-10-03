@@ -42,5 +42,5 @@
   ((print(chars (car w ))) (codes (cdr w ))) ; иначе рекурсивно для хвоста
   )
 )
-(defun chas (s)(loop for a across (string  s) collect (char-code a)))
+(defun chars (s)(loop for a across (string  s) collect (char-code a)))
 (codes '(A d r h j u (a d c)))  
