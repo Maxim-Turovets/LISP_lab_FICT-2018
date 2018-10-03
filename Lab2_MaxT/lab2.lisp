@@ -31,7 +31,7 @@
 (print (bubble-sort l4) )	 
 
 ; Task 6
- (defun chars (s)
+ (defun chars (s)  ; вытаскиваем  код символа
   (char-code s)
  )
 
@@ -43,4 +43,5 @@
   )
 )
 (defun chars (s)(loop for a across (string  s) collect (char-code a)))
-(codes '(A d r h j u (a d c)))  
+(codes '(A d r h j u (a d c)))
+(codes '(#\d #\e (#\q #\s #\m)))  
