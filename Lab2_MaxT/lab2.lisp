@@ -18,9 +18,9 @@
 
 
 (defun bubble (lst)
-  (cond ((or (null lst) (null (cdr lst))) lst)
-        (( < (car lst) (car (cdr lst))) (cons (car lst) (bubble (cdr lst))))
-        ( t (cons (car (cdr lst)) (bubble (cons (car lst) (cdr (cdr lst))))))))
+  (cond ((or (null lst) (null (cdr lst))) lst) ; если один елемент или список пуст то закончить
+        (( < (car lst) (car (cdr lst))) (cons (car lst) (bubble (cdr lst)))) ;если первый елемент больлше второго то поменять их местами (пузырек)
+        ( t (cons (car (cdr lst)) (bubble (cons (car lst) (cdr (cdr lst)))))))) ; иначе работать с вторым и третьим рекурсивно и тд
 
 
 (defun bubble-sort (lst)
