@@ -12,8 +12,8 @@
   
        
 (defun is-sortedp (lst)
-  (cond ((or (null lst) (null (cdr lst))) t)
-        ((< (car lst) (car (cdr lst))) (is-sortedp (cdr lst)))
+  (cond ((or (null lst) (null (cdr lst))) t) ; проверка не является ли список уже отсортированым
+        ((< (car lst) (car (cdr lst))) (is-sortedp (cdr lst))) ; проверять рекурсивно
         (t nil)))
 
 
