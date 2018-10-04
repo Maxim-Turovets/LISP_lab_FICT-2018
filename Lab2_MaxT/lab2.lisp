@@ -24,9 +24,9 @@
 
 
 (defun bubble-sort (lst)
-  (cond ((or (null lst) (null (cdr lst))) lst)
-        ((is-sortedp  lst) lst)
-        (t (bubble-sort (bubble lst)))))
+  (cond ((or (null lst) (null (cdr lst))) lst) ; если список пустой или в нем только один елемент то вернуть список
+        ((is-sortedp  lst) lst) ; если список уже отсортирован то вернуть его
+        (t (bubble-sort (bubble lst))))) ;  иначе сортировать список
         
 (print (bubble-sort l4) )	 
 
