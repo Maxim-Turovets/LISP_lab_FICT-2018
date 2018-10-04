@@ -30,7 +30,7 @@
         
 (print (bubble-sort l4) )	 
 
-; Task 6
+; Task 5
  (defun chars (s)  ; вытаскиваем  код символа
   (char-code s)
  )
