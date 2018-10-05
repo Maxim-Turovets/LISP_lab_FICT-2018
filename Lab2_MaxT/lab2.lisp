@@ -45,3 +45,31 @@
 (defun chars (s)(loop for a across (string  s) collect (char-code a)))
 (codes '(A d r h j u (a d c)))
 (codes '(#\d #\e (#\q #\s #\m)))  
+
+; Task 2
+
+(defun insertion (lst x)
+  (cond ((null lst) (list x))
+        ((> (car lst) x) (cons x lst))
+        (T (cons (car lst) (insertion (cdr lst) x)))))
+
+(defun isort (x &optional (s nil))
+  (cond ((null x) s)
+        (T (isort (cdr x) (insertion s (car x))))))
+
+(defun shello (lst gap finalst)
+  (cond ((null lst) finalst)
+        (T (cond ((> gap (length lst)) (append finalst (isort lst)))
+  (T (append finalst (isort (subseq lst 0 gap)) (shello (subseq lst gap (length lst)) gap finalst)))))))
+
+(defun shellSort (lst gaps)
+  (cond ((null (cdr gaps)) (shello lst (car gaps) '()))
+        (T (shellSort (shello lst (car gaps) '()) (cdr gaps)))))
+
+(defun gaps (len finalLIST)
+  '(1 4 13 40 121 364))
+
+(defun shellexecute (lst)
+  (shellSort lst (gaps (length lst) '(1))))
+
+(print (shellexecute '(4 2 8 3 1 7 5 6)))
