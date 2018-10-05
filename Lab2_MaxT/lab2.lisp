@@ -47,7 +47,6 @@
 (codes '(#\d #\e (#\q #\s #\m)))  
 
 ; Task 2
-
 (defun insertion (lst x)
   (cond ((null lst) (list x))
         ((> (car lst) x) (cons x lst))
