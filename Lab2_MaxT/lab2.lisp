@@ -53,9 +53,9 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
         ((> (car lst) x) (cons x lst)) ; если голова списка больше за вставляемый елемент то соеденить елемент и список
         (T (cons (car lst) (insertion (cdr lst) x))))) ; иначе вставить в хвост рекурсивно и соеденить с головой списка
 
-(defun isort (x &optional (s nil))
-  (cond ((null x) s)
-        (T (isort (cdr x) (insertion s (car x))))))
+(defun isort (x &optional (s nil)) ; список , необязательный параметр
+  (cond ((null x) s) ;если список пуст , то оставить исходный список 
+        (T (isort (cdr x) (insertion s (car x)))))) ; иначе поочередно c хвоста вставляем в список <s>  елементы списка <x>
 
 (defun shello (lst gap finalst)
   (cond ((null lst) finalst)
