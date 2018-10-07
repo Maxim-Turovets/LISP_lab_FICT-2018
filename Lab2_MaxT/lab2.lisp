@@ -66,7 +66,7 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
   (cond ((null (cdr gaps)) (shello lst (car gaps) '()))
         (T (shellSort (shello lst (car gaps) '()) (cdr gaps)))))
 
-(defun gaps (len finalLIST)
+(defun gaps (len finalLIST)   ; список (шаги сортировки Кнута)
   '(1 4 13 40 121 364))
 
 (defun shellexecute (lst)
