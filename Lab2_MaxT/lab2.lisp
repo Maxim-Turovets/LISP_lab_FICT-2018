@@ -47,10 +47,10 @@
 (codes '(#\d #\e (#\q #\s #\m)))  
 
 ; Task 2
-(defun insertion (lst x)
-  (cond ((null lst) (list x))
-        ((> (car lst) x) (cons x lst))
-        (T (cons (car lst) (insertion (cdr lst) x)))))
+(defun insertion (lst x) ; вставка елемента
+  (cond ((null lst) (list x))  ; если список пуст то вернуть его
+        ((> (car lst) x) (cons x lst)) ; если голова списка больше за вставляемый елемент то соеденить елемент и список
+        (T (cons (car lst) (insertion (cdr lst) x))))) ; иначе вставить в хвост рекурсивно и соеденить с головой списка
 
 (defun isort (x &optional (s nil))
   (cond ((null x) s)
