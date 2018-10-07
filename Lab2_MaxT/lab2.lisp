@@ -57,10 +57,13 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
   (cond ((null x) s) ;если список пуст , то оставить исходный список 
         (T (isort (cdr x) (insertion s (car x)))))) ; иначе поочередно c хвоста вставляем в список <s>  елементы списка <x>
 
-(defun shello (lst gap finalst)
-  (cond ((null lst) finalst)
-        (T (cond ((> gap (length lst)) (append finalst (isort lst)))
+(defun shello (lst gap finalst) ; сортировка с включением шага методом Кнута  (список шаг окончательный список)
+  (cond ((null lst) finalst)  ; если список пуст то и окончательный будет таким же 
+        (T (cond ((> gap (length lst)) (append finalst (isort lst))) ; если размер списка меньше очередного числа-шага 
+         ;то соеденить окончательный список с отсортированым списком
   (T (append finalst (isort (subseq lst 0 gap)) (shello (subseq lst gap (length lst)) gap finalst)))))))
+; subseq - (обрезать список от начала до шага сортировки)
+;иначе соеденить окончательный список с отсортированым списком по заданому шагу рекурсивно
 
 (defun shellSort (lst gaps)
   (cond ((null (cdr gaps)) (shello lst (car gaps) '()))
