@@ -46,6 +46,7 @@
 (codes '(A d r h j u (a d c)))
 (codes '(#\d #\e (#\q #\s #\m)))  
 
+https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
 ; Task 2
 (defun insertion (lst x) ; вставка елемента
   (cond ((null lst) (list x))  ; если список пуст то вернуть его
