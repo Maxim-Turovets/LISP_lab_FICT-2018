@@ -65,8 +65,9 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
 ; subseq - (обрезать список от начала до шага сортировки)
 ;иначе соеденить окончательный список с отсортированым списком по заданому шагу рекурсивно
 
-(defun shellSort (lst gaps)
-  (cond ((null (cdr gaps)) (shello lst (car gaps) '()))
+(defun shellSort (lst gaps); сортировка (список , список шагов сортировки)
+  (cond ((null (cdr gaps)) (shello lst (car gaps) '())) ; если в списке больше одного елемента то выполнять рекурсивно сортировку
+	  ; в качестве окончательного списка использовать пустой список
         (T (shellSort (shello lst (car gaps) '()) (cdr gaps)))))
 
 (defun gaps (len finalLIST)   ; список (шаги сортировки Кнута)
