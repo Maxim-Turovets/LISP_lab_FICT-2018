@@ -76,4 +76,5 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
 (defun shellexecute (lst) ; вывод отсортированого списка
   (shellSort lst (gaps (length lst) '()))) ; список входящий . шаг сортировки 
 
-(print (shellexecute '(4 2 8 3 1 7 5 6))) ; вывод на консоль
+
+(print (shellexecute '(4 2 8 3 1 5 6 23 45 87 54 23 98 2 1 9 0 5 3 3 3 3 3 3 3 3 3 3 3 3 4 5 6 45 32 98 76 89 98 65 45 32 12 16))) ; вывод на консоль
