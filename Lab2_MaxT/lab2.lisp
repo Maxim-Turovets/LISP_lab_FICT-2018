@@ -73,7 +73,7 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
 (defun gaps (len finalLIST)   ; список (шаги сортировки Кнута)
   '(1 4 13 40 121 364))
 
-(defun shellexecute (lst)
-  (shellSort lst (gaps (length lst) '(1))))
+(defun shellexecute (lst) ; вывод отсортированого списка
+  (shellSort lst (gaps (length lst) '()))) ; список входящий . шаг сортировки 
 
-(print (shellexecute '(4 2 8 3 1 7 5 6)))
+(print (shellexecute '(4 2 8 3 1 7 5 6))) ; вывод на консоль
