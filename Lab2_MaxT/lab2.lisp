@@ -30,6 +30,18 @@
         
 (print (bubble-sort l4) )	 
 
+;Task 4
+(defun merge_LISTs 
+    (LIST1 LIST2)
+    (cond ((NULL LIST1) LIST2)
+          ((NULL LIST2) LIST1)
+          ((> (car LIST1) (car LIST2)) (cons (car LIST2) (merge_LISTs LIST1 (cdr LIST2))))
+          (T (cons (car LIST1) (merge_LISTs (cdr LIST1) LIST2)))
+     )
+)
+ 
+(print (merge_LISTs '(1 2 3) '(1 2 3 4 5)))
+
 ; Task 5
  (defun chars (s)  ; вытаскиваем  код символа
   (char-code s)
