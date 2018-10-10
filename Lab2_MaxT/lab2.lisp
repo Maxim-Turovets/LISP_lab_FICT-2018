@@ -69,18 +69,18 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
   (cond ((null x) s) ;если список пуст , то оставить исходный список 
         (T (isort (cdr x) (insertion s (car x)))))) ; иначе поочередно c хвоста вставляем в список <s>  елементы списка <x>
 
-(defun shell (lst gap finalst) ; сортировка с включением шага методом Кнута  (список шаг окончательный список)
+(defun shells (lst gap finalst) ; сортировка с включением шага методом Кнута  (список шаг окончательный список)
   (cond ((null lst) finalst)  ; если список пуст то и окончательный будет таким же 
         (T (cond ((> gap (length lst)) (append finalst (isort lst))) ; если размер списка меньше очередного числа-шага 
          ;то соеденить окончательный список с отсортированым списком
-  (T (append finalst (isort (subseq lst 0 gap)) (shell (subseq lst gap (length lst)) gap finalst)))))))
+  (T (append finalst (isort (subseq lst 0 gap)) (shells (subseq lst gap (length lst)) gap finalst)))))))
 ; subseq - (обрезать список от начала до шага сортировки)
 ;иначе соеденить окончательный список с отсортированым списком по заданому шагу рекурсивно
 
 (defun shellSorting (lst gaps); сортировка (список , список шагов сортировки)
-  (cond ((null (cdr gaps)) (shell lst (car gaps) '())) ; если в списке больше одного елемента то выполнять рекурсивно сортировку
+  (cond ((null (cdr gaps)) (shells lst (car gaps) '())) ; если в списке больше одного елемента то выполнять рекурсивно сортировку
 	  ; в качестве окончательного списка использовать пустой список
-        (T (shellSorting (shell lst (car gaps) '()) (cdr gaps)))))
+        (T (shellSorting (shells lst (car gaps) '()) (cdr gaps)))))
 
 (defun gaps (len finalLIST)   ; список (шаги сортировки Кнута)
   '(1 4 13 40 121 364))
