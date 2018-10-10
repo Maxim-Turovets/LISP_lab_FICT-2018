@@ -69,24 +69,24 @@ https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
   (cond ((null x) s) ;если список пуст , то оставить исходный список 
         (T (isort (cdr x) (insertion s (car x)))))) ; иначе поочередно c хвоста вставляем в список <s>  елементы списка <x>
 
-(defun shello (lst gap finalst) ; сортировка с включением шага методом Кнута  (список шаг окончательный список)
+(defun shell (lst gap finalst) ; сортировка с включением шага методом Кнута  (список шаг окончательный список)
   (cond ((null lst) finalst)  ; если список пуст то и окончательный будет таким же 
         (T (cond ((> gap (length lst)) (append finalst (isort lst))) ; если размер списка меньше очередного числа-шага 
          ;то соеденить окончательный список с отсортированым списком
-  (T (append finalst (isort (subseq lst 0 gap)) (shello (subseq lst gap (length lst)) gap finalst)))))))
+  (T (append finalst (isort (subseq lst 0 gap)) (shell (subseq lst gap (length lst)) gap finalst)))))))
 ; subseq - (обрезать список от начала до шага сортировки)
 ;иначе соеденить окончательный список с отсортированым списком по заданому шагу рекурсивно
 
-(defun shellSort (lst gaps); сортировка (список , список шагов сортировки)
-  (cond ((null (cdr gaps)) (shello lst (car gaps) '())) ; если в списке больше одного елемента то выполнять рекурсивно сортировку
+(defun shellSorting (lst gaps); сортировка (список , список шагов сортировки)
+  (cond ((null (cdr gaps)) (shell lst (car gaps) '())) ; если в списке больше одного елемента то выполнять рекурсивно сортировку
 	  ; в качестве окончательного списка использовать пустой список
-        (T (shellSort (shello lst (car gaps) '()) (cdr gaps)))))
+        (T (shellSorting (shell lst (car gaps) '()) (cdr gaps)))))
 
 (defun gaps (len finalLIST)   ; список (шаги сортировки Кнута)
   '(1 4 13 40 121 364))
 
-(defun shellexecute (lst) ; вывод отсортированого списка
-  (shellSort lst (gaps (length lst) '()))) ; список входящий . шаг сортировки 
+(defun shellsortingprint (lst) ; вывод отсортированого списка
+  (shellSorting lst (gaps (length lst) '()))) ; список входящий . шаг сортировки 
 
 
-(print (shellexecute '(4 2 8 3 1 5 6 23 45 87 54 23 98 2 1 9 0 5 3 3 3 3 3 3 3 3 3 3 3 3 4 5 6 45 32 98 76 89 98 65 45 32 12 16))) ; вывод на консоль
+(print (shellsortingprint '(4 2 8 3 1 5 6 23 45 87 54 23 98 2 1 9 0 5 3 3 3 3 3 3 3 3 3 3 3 3 4 5 6 45 32 98 76 89 98 65 45 32 12 16))) ; вывод на консоль
