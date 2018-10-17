@@ -1,4 +1,4 @@
-:Task 1
+;Task 1
 ; lambda
 (defun fact_lambda (n)
   ((lambda (n)
@@ -121,7 +121,17 @@
  (print(intr '(car (cdr '(r e s z c)))))
  (print(intr '(* (- 3 2) 8)))
 
-:Task 6
+;Task 5
+(defun logarifm (num value)
+ (cond
+    ((null num) value)
+    ((null value) num)
+    (t (/(log num)(log value)) ))
+    )
+
+(print (logarifm 4 6))
+
+;Task 6
 (defun sw (s)
   (map 'list #'string s))
  
@@ -139,3 +149,219 @@
   (cn (az (sw s) a b)))
  
 (print (a-delete-b "abcq2w abq9wc" "q" "w"))
+
+;Task 7
+(let* (
+		(phrase "Лисп самый легкий язык")
+		(splitLetters "ауоэияюёеы")
+		(splitL (lambda (fn chars strings)
+		 (cond 
+			((eq (length strings) 0)nil)
+			((eq chars (char strings 0))t)
+			(t(funcall fn fn chars (subseq strings 1)))
+			)
+		)
+		)
+		( getInd (lambda (fn word index)
+							(cond 
+								((eq index (length word))index)
+								((funcall splitL splitL (char word index) splitLetters) 	(+ index 1))
+								(t (funcall fn fn word (+ index 1)))
+							)
+						)
+		)
+		(splitWord (lambda (fn word)
+						(cond 
+							((eq (length word) 0) 	nil)
+							(t (cons 
+							   (subseq word 0 (funcall  getInd  getInd word 0))
+							(funcall fn fn (subseq word (funcall  getInd  getInd word 0)))
+							)
+							)
+						)
+					)
+		)
+		(norm (lambda (slogs)
+						(cond 
+							((funcall splitL splitL 
+							(char 
+							(car (last slogs))
+							(- (length (car (last slogs))) 1)
+							) splitLetters ; Last symbol
+								)	slogs
+							)
+							(t 
+							(reverse (cons 
+							(concatenate 'string 
+							(second (reverse slogs)) 
+							(car (reverse slogs))
+							)
+							(cddr (reverse slogs))
+							)
+							)
+							)
+						)
+					)
+		)
+		(getNormSlogs (lambda (word)
+						(funcall norm (funcall splitWord splitWord word))
+					)
+		)
+		(getIndexOfSpace (lambda (fn word index)
+							(cond 
+								((eq index (length word))index)
+								((eq (char word index) #\Space)index)
+								(t (funcall fn fn word (+ index 1)))
+							)
+						)
+		)
+		(splits (lambda (fn phrase)
+						(cond 
+							(	(eq 
+									(funcall getIndexOfSpace getIndexOfSpace phrase 0) 
+									(length phrase)
+								)	(list phrase)
+							)
+							(t 
+								(cons 
+									(subseq phrase 0 (funcall getIndexOfSpace getIndexOfSpace phrase 0))
+									(funcall fn fn (subseq phrase (+ 1 (funcall getIndexOfSpace getIndexOfSpace phrase 0))))
+								)
+							)
+						)
+					)
+		)
+	)
+
+	(print (mapcar getNormSlogs (funcall splits splits phrase)))
+	(terpri)
+)
+
+; Task8
+(let* (
+		(text "как-то летом на рассвете")	  
+		(keyword "лень")
+		(splitLetters "ауоэияюёеы")
+		(splitL (lambda (fn chars strings)
+						(cond 
+							((eq (length strings) 0) nil)
+							((eq chars (char strings 0))t)
+							(t (funcall fn fn chars (subseq strings 1)))
+						)
+					)
+		)
+		( getInd (lambda (fn word index)
+								(cond 
+									((eq index (length word)) index)
+									((funcall splitL splitL (char word index) splitLetters) 	(+ index 1))
+									(t (funcall fn fn word (+ index 1)))
+								)
+							)
+		)
+		(getIndexOfSpace (lambda (fn word index)
+							(cond 
+								((eq index (length word))index)
+								((eq (char word index) #\Space)index)
+								(t (funcall fn fn word (+ index 1)))
+							)
+						)
+		)
+		(splits (lambda (fn phrase)
+							(cond 
+								(	(eq 
+										(funcall getIndexOfSpace getIndexOfSpace phrase 0) 
+										(length phrase)
+									)	(list phrase)
+								)
+								(t 
+									(cons 
+										(subseq phrase 0 (funcall getIndexOfSpace getIndexOfSpace phrase 0))
+										(funcall fn fn (subseq phrase (+ 1 (funcall getIndexOfSpace getIndexOfSpace phrase 0))))
+									)
+								)
+							)
+						)
+		)
+	)
+
+	(print (mapcar
+				(lambda (word)
+					(concatenate 'string
+						(subseq keyword 0	(funcall  getInd  getInd keyword 0))
+						(subseq word (funcall  getInd  getInd word 0))
+					)
+				)
+				(funcall splits splits text)
+			)
+	)
+	(terpri)
+)
+
+;; Task 9
+(let* (
+		(getIndexOfSpace (lambda (fn word index)
+								(cond 
+									((eq index (length word)) index)
+									((eq (char word index) #\Space)index)
+									(t (funcall fn fn word (+ index 1)))
+								)
+						)
+		)
+		(splits (lambda (fn phrase)
+							(cond 
+								((eq (funcall getIndexOfSpace getIndexOfSpace phrase 0) (length phrase))
+									(list phrase)
+								)
+								(t (cons (subseq phrase 0 (funcall getIndexOfSpace getIndexOfSpace phrase 0))
+										 (funcall fn fn (subseq phrase
+										 					(+ 1 (funcall getIndexOfSpace getIndexOfSpace phrase 0))
+										 				)
+										 )
+									)
+								)
+							)
+						)
+		)
+		(removeEl (lambda (fn mylist el)
+						(cond
+							((null mylist)nil)
+							((and (atom mylist) (eq mylist el))nil)
+							((string= (car mylist) el) (funcall fn fn (cdr mylist) el))
+							(t
+								(cons (car mylist) (funcall fn fn (cdr mylist) el))
+							)
+						)
+					) 
+		)
+		(countOfRepeting (lambda (fn lst word count)
+							(cond
+								((null lst)	(cons word count))
+								((and (atom lst) (string= lst word))(cons word (+ count 1)))
+								((string= (car lst) word)(funcall fn fn (cdr lst) word (+ count 1)))
+								(t(funcall fn fn (cdr lst) word count))
+							)
+						)
+		)
+		(buildListOfRepeatingWords 
+		(lambda (fn lst)
+		 (cond
+		 ((null lst)nil)
+		  ((atom lst)		(list lst 1))
+		(t(cons 
+		(funcall countOfRepeting countOfRepeting (cdr lst) (car lst) 1) 
+		(funcall fn fn (funcall removeEl removeEl lst (car lst)))
+				)
+			)		
+		)
+		)
+		)
+	)
+
+
+	(print (funcall splits splits 
+		"Приходит день, приходит час, и понимаешь: все не вечно.. Жизнь бессердечно учит нас о том, что время быстротечно..О том, что нужно все ценить,беречь все то, что нам дается.. Ведь жизнь - как тоненькая нить, она порой внезапно рвется.."))
+	(print (funcall buildListOfRepeatingWords buildListOfRepeatingWords (funcall splits splits 
+		"Приходит день, приходит час, и понимаешь: все не вечно.. Жизнь бессердечно учит нас о том, что время быстротечно..О том, что нужно все ценить,беречь все то, что нам дается.. Ведь жизнь - как тоненькая нить, она порой внезапно рвется.."))
+	)
+	(terpri)
+)
