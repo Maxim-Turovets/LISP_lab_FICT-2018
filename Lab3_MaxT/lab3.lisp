@@ -95,6 +95,31 @@
                      ;list1     list2   count
        (print( ins '(1 2 3 4) '(5 6 7 8) 4))
 
+;Task 4
+
+(defun intr (expr)
+  (cond
+    ((null expr) nil)
+     ((atom expr) expr)
+    ((eq (car expr) 'car)
+      (car (intr (second expr))))
+    ((eq (car expr) 'cdr)  
+      (cdr (intr (second expr))))
+    ((eq (car expr) '*)
+      (* (intr (second expr)) (intr (third expr))))
+    ((eq (car expr) '/) 
+      (/ (intr (second expr)) (intr (third expr))))
+    ((eq (car expr) '+)
+      (+ (intr (second expr)) (intr (third expr))))
+    ((eq (car expr) '-)
+      (- (intr (second expr)) (intr (third expr))))
+    ((eq (car expr) 'cons) (cons (intr (second expr)) (intr (third expr))))
+      (t (second expr))))
+
+
+ (print(intr '(cons '(d g) '(l i s p))))
+ (print(intr '(car (cdr '(r e s z c)))))
+ (print(intr '(* (- 3 2) 8)))
 
 :Task 6
 (defun sw (s)
