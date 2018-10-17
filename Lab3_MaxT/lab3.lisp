@@ -7,7 +7,6 @@
       (t (* n (fact_lambda (- n 1))))))
   n)
 )
-
 ; let
 (defun fact_let (n)
   (let ((n
