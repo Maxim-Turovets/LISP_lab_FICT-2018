@@ -9,7 +9,6 @@
 	   
 ; Task 3
   (setq l4 '(1 2 3 8 5 4))
-  
        
 (defun is-sortedp (lst)
   (cond ((or (null lst) (null (cdr lst))) t) ; проверка не является ли список уже отсортированым
