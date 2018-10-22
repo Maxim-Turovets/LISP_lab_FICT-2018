@@ -21,7 +21,6 @@
         (( < (car lst) (car (cdr lst))) (cons (car lst) (bubble (cdr lst)))) ;если первый елемент больлше второго то поменять их местами (пузырек)
         ( t (cons (car (cdr lst)) (bubble (cons (car lst) (cdr (cdr lst)))))))) ; иначе работать с вторым и третьим рекурсивно и тд
 
-
 (defun bubble-sort (lst)
   (cond ((or (null lst) (null (cdr lst))) lst) ; если список пустой или в нем только один елемент то вернуть список
         ((is-sortedp  lst) lst) ; если список уже отсортирован то вернуть его
