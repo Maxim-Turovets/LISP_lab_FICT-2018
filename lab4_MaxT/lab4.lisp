@@ -20,11 +20,11 @@
 (defun select (selector-fn)
 (remove-if-not selector-fn *db*))
 
-;вибирає тип телевізійної системи
+;вибирає тип виставки
 (defun type-selector (type)
 (lambda (ts) (equal (getf ts :type) type)))
 
-;генерує вираз вибору, яке повертає всі записи про тел. системи, які співпадають зі значеннями, заданими в where
+;генерує вираз вибору, яке повертає всі записи про виставки, які співпадають зі значеннями, заданими в where
 (defun where (&key production type naming)
 (lambda (ts)
 (and
