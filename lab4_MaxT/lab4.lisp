@@ -1,3 +1,6 @@
+
+    
+    
 ;http://lisper.ru/pcl/practical-a-simple-database
 
 ;Выставки и конференции
@@ -51,7 +54,8 @@ row) *db*)))
 (defun make-comparison-expr (field value)
 (list 'equal (list 'getf 'ts field) value))
 
-
+; добавление значений в базу
+ (print "Add info")
  (add-record (make-ts "Flowers" "Сreative" "Modern"))
  (add-record (make-ts "Pictures" "Сreative" "PostModern"))
  (add-record (make-ts "Electronics" "Scientific" "Nowadays"))
