@@ -2,8 +2,8 @@
 
 ;Выставки и конференции
 
-(defun make-ts (production type naming)
-(list :production production :type type :naming naming))
+(defun make-ts (title type style)
+(list :title title :type type :style style))
 
 ;глобальна змінна
 (defvar *db* nil)
@@ -50,3 +50,8 @@ row) *db*)))
 ;пошук за заданим значенням
 (defun make-comparison-expr (field value)
 (list 'equal (list 'getf 'ts field) value))
+
+ (add-record (make-ts "Flowers" "Сreative" "Modern"))
+ (add-record (make-ts "Pictures" "Сreative" "PostModern"))
+ (add-record (make-ts "Electronics" "Scientific" "Nowadays"))
+ (dump-db)
