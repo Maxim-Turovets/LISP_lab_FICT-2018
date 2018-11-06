@@ -8,13 +8,13 @@
 (defun make-ts (title type style)
 (list :title title :type type :style style))
 
-;глобальна змінна
+;Глобальная переменная
 (defvar *db* nil)
 
-;додавання запису в базу даних
+; Добавления записи в базу данных
 (defun add-record (ts) (push ts *db*))
 
-;виводить зміст бази данних в більш читабельній формі
+; Выводит содержимое базы данных в более читабельный форме
 (defun dump-db ()
 (dolist (ts *db*)
 (format t "~{~a:~10t~a~%~}~%" ts)))
