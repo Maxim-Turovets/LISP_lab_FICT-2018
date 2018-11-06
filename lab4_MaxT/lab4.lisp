@@ -16,42 +16,57 @@
 (dolist (ts *db*)
 (format t "~{~a:~10t~a~%~}~%" ts)))
 
-;вибирає деяке значення з бази даних
+; Выбирает некоторое значение из базы данных
 (defun select (selector-fn)
 (remove-if-not selector-fn *db*))
 
-;вибирає тип виставки
+; Выбирает тип выставки
 (defun type-selector (type)
 (lambda (ts) (equal (getf ts :type) type)))
 
-;генерує вираз вибору, яке повертає всі записи про виставки, які співпадають зі значеннями, заданими в where
-(defun where (&key production type naming)
+; Генерирует выражение выбора, которое возвращает все записи о выставках, которые совпадают со значениями, заданными в where
+(defun where (&key title type style)
 (lambda (ts)
 (and
-(if production (equal (getf ts :production) production) t)
+(if title (equal (getf ts :title) title) t)
 (if type (equal (getf ts :type) type) t)
-(if naming (equal (getf ts :naming) naming) t))))
+(if style (equal (getf ts :style) style) t))))
 
-;оновлення та використання аргументов-ключів для задання нового значення
-(defun update (selector-fn &key production type naming (ripped nil ripped-p))
+; Обновления и использования аргументов-ключей для предоставления нового значения
+(defun update (selector-fn &key title type style (ripped nil ripped-p))
 (setf *db*
 (mapcar
 (lambda (row)
 (when (funcall selector-fn row)
-(if production (setf (getf row :production) production))
+(if title (setf (getf row :title) title))
 (if type (setf (getf row :type) type))
-(if naming (setf (getf row :naming) naming)))
+(if style (setf (getf row :style) style)))
 row) *db*)))
 
-;видалення рядків із бази даних
+;Удаление строк из базы данных
 (defun delete-rows (selector-fn)
 (setf *db* (remove-if selector-fn *db*)))
 
-;пошук за заданим значенням
+; Поиск по заданным значениям
 (defun make-comparison-expr (field value)
 (list 'equal (list 'getf 'ts field) value))
+
 
  (add-record (make-ts "Flowers" "Сreative" "Modern"))
  (add-record (make-ts "Pictures" "Сreative" "PostModern"))
  (add-record (make-ts "Electronics" "Scientific" "Nowadays"))
  (dump-db)
+ 
+ ;  поиск
+ (print "Search 1")
+ (print(select(type-selector "Scientific")))
+ (print "Search 2")
+ (print(select(where :title "Flowers")))
+ 
+ ;обновление данных
+ (print "Update")
+ (print(update(where :style "PostModern") :style "Avangard"))
+ 
+  ; удаление 
+ (print "Delete")
+ (print (delete-rows(where :title "Pictures" )))
