@@ -44,7 +44,7 @@
     )
 )
 
-(defun derfun (fun arg)
+(defun defun (fun arg)
     (cond ((equal 'SIN fun) (list (list 'COS arg) '* (deriv arg) ))
           ((equal 'COS fun) (list (list '- (list 'SIN arg)) '*
           (deriv arg) ))
@@ -106,7 +106,7 @@
     ((eq (car expr) 'cdr)  
       (cdr (intr (second expr))))
     ((eq (car expr) '*)
-      (* (intr (second expr)) (intr (third expr))))
+      ( (intr (second expr)) (intr (third expr))))
     ((eq (car expr) '/) 
       (/ (intr (second expr)) (intr (third expr))))
     ((eq (car expr) '+)
@@ -146,7 +146,7 @@
         ((concatenate 'string (car w) (cn (cdr w))))))
  
 (defun a-delete-b (s a b)
-  (cn (az (sw s) a b)))
+  (cn (z (sw s) a b)))
  
 (print (a-delete-b "abcq2w abq9wc" "q" "w"))
 
@@ -203,7 +203,7 @@
 						)
 					)
 		)
-		(getNormSlogs (lambda (word)
+		(getormSlogs (lambda (word)
 						(funcall norm (funcall splitWord splitWord word))
 					)
 		)
@@ -250,7 +250,7 @@
 						)
 					)
 		)
-		( getInd (lambda (fn word index)
+		( getnd (lambda (fn word index)
 								(cond 
 									((eq index (length word)) index)
 									((funcall splitL splitL (char word index) splitLetters) 	(+ index 1))
@@ -322,7 +322,7 @@
 							)
 						)
 		)
-		(removeEl (lambda (fn mylist el)
+		(removEl (lambda (fn mylist el)
 						(cond
 							((null mylist)nil)
 							((and (atom mylist) (eq mylist el))nil)
