@@ -1,10 +1,3 @@
-
-(setq aq (make-array 10 :fill-pointer 0))
-
-;http://lisper.ru/pcl/practical-a-simple-database
-
-;Выставки и конференции
-
 (defun make-ts (title type style)
 (list :title title :type type :style style)
 )
