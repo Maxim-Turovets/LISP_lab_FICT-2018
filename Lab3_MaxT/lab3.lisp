@@ -63,13 +63,6 @@
     (list (deriv arg1) '- (deriv arg2))
 )
 
-(defun derdiv (arg1 arg2)
-    (list (list (list (deriv arg1) '* arg2)
-     '- (list arg1 '* (deriv arg2) ))
-     '/ (list arg2 '^ '2)
-    )
-)
-
 (defun dermult (arg1 arg2)
     (list (list (deriv arg1) '* arg2)
      '+ (list arg1 '* (deriv arg2)) 
@@ -114,7 +107,7 @@
     ((eq (car expr) '-)
       (- (intr (second expr)) (intr (third expr))))
     ((eq (car expr) 'cons) (cons (intr (second expr)) (intr (third expr))))
-      (t (second expr))))
+      (t ())))
 
 
  (print(intr '(cons '(d g) '(l i s p))))
