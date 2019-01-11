@@ -55,6 +55,7 @@
 (defun chars (s)(loop for a across (string  s) collect (char-code a)))
 (codes '(A d r h j u (a d c)))
 (codes '(#\d #\e (#\q #\s #\m)))  
+ 
 
 https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Common_Lisp
 ; Task 2
