@@ -8,8 +8,7 @@
        (print( ins '(1 2 3 4) '(5 6 7 8) 4))
 	   
 ; Task 3
-  (setq l4 '(1 2 3 8 5 4))
-       
+  (setq l4 '(1 2 3 8 5 4))  
 (defun is-sortedp (lst)
   (cond ((or (null lst) (null (cdr lst))) t) ; проверка не является ли список уже отсортированым
         ((< (car lst) (car (cdr lst))) (is-sortedp (cdr lst))) ; проверять рекурсивно
